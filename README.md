@@ -3,6 +3,8 @@
 
 TinyE8 emulates [Ben Eater's](https://www.youtube.com/channel/UCS0N5baNlQWJCUrhCEo8WlA) 8 bit breadboard CPU. Implemented all the Instructions except `JC` and `JZ`, I need to watch the whole [playlist](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU) before implementing these two instructions.
 
+![screenshot](https://github.com/0xhh/TinyE8/blob/main/screenshot.png)
+
 Source code is extensively commented, so that it is readable.
 
 ## Instruction set
