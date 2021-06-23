@@ -1,0 +1,1 @@
+g++ -c src/*.cpp -std=c++14 -g -Wall -I include && g++ *.o -o ./main && rm *.o
