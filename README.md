@@ -88,8 +88,8 @@ If you are on Linux, make sure you have `g++` working. Then run `sh build.sh` fr
 It will create `main` binary file. Run it using `./main`.
 
 If you are on Windows, install `C++` compiler using `MinGW` and then run the following command on the `CMD` or `Powershell`
-`g++ -c src/*.cpp -std=c++14 -g -Wall -I include && g++ *.o -o ./main.exe`
-and then run `main.exe` file from `CMD` or `Powershell`
+
+`g++ -c src/*.cpp -std=c++14 -g -Wall -I include && g++ *.o -o ./main.exe` and then run `main.exe` file from `CMD` or `Powershell`
 
 This will run the program you loaded into `memory` in `/src/cpu.cpp` file at `line 40`.
 
