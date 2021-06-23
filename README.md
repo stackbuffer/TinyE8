@@ -81,6 +81,18 @@ memory[0b1001] = 3; //store 3 at memory[9], so that we can access it using ADD i
 ```
 I hope you understand it.
 
+## Building
+Clone the repo using `git clone https://github.com/0xhh/TinyE8.git` and then `cd TinyE8`.
+
+If you are on Linux, make sure you have `g++` working. Then run `sh build.sh` from the terminal.
+It will create `main` binary file. Run it using `./main`.
+
+If you are on Windows, install `C++` compiler using `MinGW` and then run the following command on the `CMD` or `Powershell`
+`g++ -c src/*.cpp -std=c++14 -g -Wall -I include && g++ *.o -o ./main.exe`
+and then run `main.exe` file from `CMD` or `Powershell`
+
+This will run the program you loaded into `memory` in `/src/cpu.cpp` file at `line 40`.
+
 ## TODO
 - [ ] JC - Implement jump if carry
 - [ ] JZ - Implement jump if zero
