@@ -1,5 +1,4 @@
 #include <iostream>
-#include <bitset>
 #include "cpu.hpp"
 
 int main(int argc, const char *argv[]){
