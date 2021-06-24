@@ -79,6 +79,27 @@ memory[0b0010] = 0b11100000; //OUT 0000 or OUTPUT A register contents
 memory[0b1000] = 7; //store 7 at memory[8], so that we can access it using LDA instruction
 memory[0b1001] = 3; //store 3 at memory[9], so that we can access it using ADD instruction
 ```
+
+Here's a program that prints Triangular numbers upto 255
+```
+	memory[0x0] = 0x1F;
+	memory[0x1] = 0x2E;
+	memory[0x2] = 0x79;
+	memory[0x3] = 0xE0;
+	memory[0x4] = 0x4F;
+	memory[0x5] = 0x1E;
+	memory[0x6] = 0x2D;
+	memory[0x7] = 0x4E;
+	memory[0x8] = 0x60;
+	memory[0x9] = 0x50;
+	memory[0xA] = 0x4F;
+	memory[0xB] = 0x1D;
+	memory[0xC] = 0x4E;
+	memory[0xD] = 1;
+	memory[0xE] = 1;
+	memory[0xF] = 0;
+```
+
 I hope you understand it.
 
 ## Building
