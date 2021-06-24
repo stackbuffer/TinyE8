@@ -1,7 +1,7 @@
 
 # TinyE8 - Ben Eater's 8 Bit CPU Emulator
 
-TinyE8 emulates [Ben Eater's](https://www.youtube.com/channel/UCS0N5baNlQWJCUrhCEo8WlA) 8 bit breadboard CPU. Implemented all the Instructions except `JC` and `JZ`, I need to watch the whole [playlist](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU) before implementing these two instructions.
+TinyE8 emulates [Ben Eater's](https://www.youtube.com/channel/UCS0N5baNlQWJCUrhCEo8WlA) 8 bit breadboard CPU. Implemented all the Instructions ~~except `JC` and `JZ`, I need to watch the whole [playlist](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU) before implementing these two instructions.~~.
 
 ![screenshot](https://github.com/0xhh/TinyE8/blob/main/screenshot.png)
 
@@ -49,9 +49,9 @@ In the mean time feel free to fork, implement these instructions and start a pul
 - [x] SUB
 - [x] STA
 - [x] LDI
-- [x] JMP - this would backstab me
-- [ ] JC
-- [ ] JZ
+- [x] JMP - ah, fixed it
+- [x] JC  - implemented
+- [x] JZ  - implemented
 - [x] OUT
 - [x] HLT
 
@@ -94,8 +94,8 @@ If you are on Windows, install `C++` compiler using `MinGW` and then run the fol
 This will run the program you loaded into `memory` in `/src/cpu.cpp` file at `line 40`.
 
 ## TODO
-- [ ] JC - Implement jump if carry
-- [ ] JZ - Implement jump if zero
+- [x] JC - Implement jump if carry
+- [x] JZ - Implement jump if zero
 - [ ] load program from `.bin` file
 - [ ] did I miss something?
 
