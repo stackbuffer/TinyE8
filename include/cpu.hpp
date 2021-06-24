@@ -47,6 +47,9 @@ public:
 	uint8_t memory[16]; //16 bytes of memory or RAM
 
 	uint16_t OUT; //output
+
+	bool CF; //Carry Flag
+	bool ZF; //Zero Flag
 	bool HALT; //halt flag
 
 	//constructor and destructor
