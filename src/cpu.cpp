@@ -118,15 +118,15 @@ void CPU::execute(){
 
 		//JMP
 		case 0b0110:
-			//jump to xxxx instruction
-			pc = IR & 0x0f;
+			//jump to xxxx instruction and do not increment the PC
+			pc = (IR & 0x0f) - 1;
 			break;
 
 		//JC
 		case 0b0111:
 			//jump if carry flag is set
 			if(CF){
-				pc = IR & 0x0f;
+				pc = (IR & 0x0f) - 1;
 			}
 			break;
 
@@ -134,7 +134,7 @@ void CPU::execute(){
 		case 0b1000:
 			//jump if zero flag is set
 			if(ZF){
-				pc = IR & 0x0f;
+				pc = (IR & 0x0f) - 1;
 			}
 			break;
 
