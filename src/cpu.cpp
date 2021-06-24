@@ -25,7 +25,12 @@ void CPU::init(){
 		memory[i] = 0;
 	}
 
+	//set output register to 0
 	OUT = 0;
+
+	//set flags to false
+	CF = false;
+	ZF = false;
 	HALT = false;
 }
 
@@ -37,6 +42,7 @@ int CPU::loadProgram(){
 	//load 7 at 0110
 	//and load 3 at 0111
 
+	
 	memory[0b0000] = 0b00011000; //LDA 1000 or load 7 into A register
 	memory[0b0001] = 0b00101001; //ADD 1001 or load 3 into B register, then ADD and store it in A
 	memory[0b0010] = 0b11100000; //OUT 0000 or OUTPUT A register contents
@@ -48,7 +54,7 @@ int CPU::loadProgram(){
 	memory[0b1000] = 7;
 	memory[0b1001] = 3;
 	memory[0b1011] = 2;
-
+	
 	return 1;
 }
 
@@ -63,7 +69,6 @@ void CPU::execute(){
 
 	//the following code extracts the instruction from the higher 4 bits
 	uint8_t opcode = (IR & 0xF0) >> 4;
-
 	switch(opcode){
 		//NOP
 		case 0b0000:
@@ -76,12 +81,29 @@ void CPU::execute(){
 
 		//ADD
 		case 0b0010:
-			A = A + memory[(IR & 0x0f)];
+			//set carry flag if addition is overflow. As this is 8 bit, 2^8-1 = 255;
+			//when, the addition result is greater than 255, set the carry flag
+			CF = (uint16_t(A) + uint16_t(memory[(IR & 0x0f)])) > 255;
+
+			//normal addition
+			B = memory[(IR & 0x0f)];
+			A = A + B;
+
+			//set zero flag only if A==0
+			ZF = A == 0; 
 			break;
 
 		//SUB
 		case 0b0011:
-			A = A - memory[(IR & 0x0f)];
+			//set carry flag if subtraction is overflow, just like in addition
+			CF = (uint16_t(A) - uint16_t(memory[(IR & 0x0f)])) > 255;
+
+			//normal subtraction
+			B = memory[(IR & 0x0f)];
+			A = A - B;
+
+			//set zero flag only if A==0
+			ZF = A == 0;
 			break;
 
 		//STA
@@ -96,23 +118,29 @@ void CPU::execute(){
 
 		//JMP
 		case 0b0110:
-			//someone verify whether this is true or not.
-			pc = pc + (IR & 0x0f);
+			//jump to xxxx instruction
+			pc = IR & 0x0f;
 			break;
 
 		//JC
 		case 0b0111:
-			//TODO : Implement jump if carry is set
+			//jump if carry flag is set
+			if(CF){
+				pc = IR & 0x0f;
+			}
 			break;
 
 		//JZ
 		case 0b1000:
-			//TODO : Implement jump if zero is set
+			//jump if zero flag is set
+			if(ZF){
+				pc = IR & 0x0f;
+			}
 			break;
 
 		//OUT
 		case 0b1110:
-			OUT = A;
+			OUT = (uint16_t)A;
 			break;
 
 		//HLT - set HALT flag to true
