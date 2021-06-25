@@ -34,7 +34,7 @@ void CPU::init(){
 	HALT = false;
 }
 
-int CPU::loadProgram(){
+int CPU::loadProgram(const char *filename){
 	init();
 
 	//load program into memory.
@@ -42,7 +42,7 @@ int CPU::loadProgram(){
 	//load 7 at 0110
 	//and load 3 at 0111
 
-	
+	/*
 	memory[0b0000] = 0b00011000; //LDA 1000 or load 7 into A register
 	memory[0b0001] = 0b00101001; //ADD 1001 or load 3 into B register, then ADD and store it in A
 	memory[0b0010] = 0b11100000; //OUT 0000 or OUTPUT A register contents
@@ -54,6 +54,46 @@ int CPU::loadProgram(){
 	memory[0b1000] = 7;
 	memory[0b1001] = 3;
 	memory[0b1011] = 2;
+	*/
+
+	//This program will print Triangular numbers until 255
+	/*memory[0x0] = 0x1F;
+	memory[0x1] = 0x2E;
+	memory[0x2] = 0x79;
+	memory[0x3] = 0xE0;
+	memory[0x4] = 0x4F;
+	memory[0x5] = 0x1E;
+	memory[0x6] = 0x2D;
+	memory[0x7] = 0x4E;
+	memory[0x8] = 0x60;
+	memory[0x9] = 0x50;
+	memory[0xA] = 0x4F;
+	memory[0xB] = 0x1D;
+	memory[0xC] = 0x4E;
+	memory[0xD] = 1;
+	memory[0xE] = 1;
+	memory[0xF] = 0;*/
+
+	FILE *fp = fopen(filename, "rb");
+
+	if(fp == nullptr){
+		std::cout << "File not found!\n";
+		exit(0);
+	}
+
+	fseek(fp, 0, SEEK_END);          // Jump to the end of the file
+	int filesize = ftell(fp);             // Get the current byte offset in the file
+	rewind(fp);                      // Jump back to the beginning of the file
+	
+	uint8_t *buffer = (uint8_t *) malloc((filesize + 1) * sizeof(uint8_t));	
+	
+	fread(buffer, filesize, 1, fp); // Read in the entire file
+	fclose(fp);
+	
+	for (int i = 0; i < filesize; i++) {
+		memory[i] = buffer[i];
+	}
+
 	
 	return 1;
 }
@@ -141,6 +181,7 @@ void CPU::execute(){
 		//OUT
 		case 0b1110:
 			OUT = (uint16_t)A;
+			std::cout << OUT << "\n";
 			break;
 
 		//HLT - set HALT flag to true
