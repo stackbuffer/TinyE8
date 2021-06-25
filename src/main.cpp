@@ -2,12 +2,18 @@
 #include "cpu.hpp"
 
 int main(int argc, const char *argv[]){
+	if(argc != 3){
+		std::cout << "Usage : ./main <bin file> <debug>\n\n";
+		std::cout << "<bin file> - binary file compiled using eas.py assembler\n";
+		std::cout << "<debug> - 1 will print debug info and 0 will omit it\n";
+		exit(1);
+	}
 
-	bool debug = true;
+	int debug = std::stoi(argv[2]);
 
 	CPU cpu; //create the CPU object
 
-	cpu.loadProgram(); //load the program into the memory
+	cpu.loadProgram(argv[1]); //load the program into the memory
 
 	//execute until HALT flag is set to true
 	while(!cpu.HALT){
@@ -22,7 +28,7 @@ int main(int argc, const char *argv[]){
 	}
 
 	//Debug output
-	if(debug == true){
+	if(debug == 1){
 		std::cout << " ----------------- \n";
 		std::cout << "|      DEBUG      |\n";
 		std::cout << " ----------------- \n";
