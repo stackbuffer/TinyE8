@@ -57,6 +57,6 @@ public:
 	~CPU();
 
 	void init(); //initializes the CPU by resetting all the components
-	int loadProgram(); //loads a program into the memory[]
+	int loadProgram(const char *filename); //loads a program into the memory[]
 	void execute(); // Fetch->Decode->Execute opcode cycle
 };
